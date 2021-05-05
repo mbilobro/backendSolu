@@ -35,6 +35,9 @@ module.exports = new EntitySchema({
         image_alt: {
             type: 'varchar'
         },
+        slug: {
+            type: 'varchar'
+        },
     },
     // relations: {
     //     post_category: {
