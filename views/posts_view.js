@@ -1,4 +1,3 @@
-const dateFormat = require('dateformat')
 
 module.exports =  {
     render(post) {
@@ -12,7 +11,7 @@ module.exports =  {
             likes: post.likes,
             description: post.description,
             image_alt: post.image_alt,
-            created_at: dateFormat(post.created_at, "dd/mm/yyyy hh:mm:ss"),
+            created_at: post.created_at
         };
     },
 

@@ -39,16 +39,16 @@ module.exports = {
 
         const postsRepository = getRepository(Post);
 
-        const post = await postsRepository.findOneOrFail(id);
+        const post = await postsRepository.findOne(id)
 
-        return res.json(PostView.render(post));
+        return (post? res.json(PostView.render(post)) : res.json([]));
     },
 
     async create(req, res) {
         try {
             await uploadFile(req, res)
             
-            if (req.file == undefined) {
+            if (!req.files || req.files.length === 0) {
                 return res.status(400).send({ message: "Please upload a file!" });
             }
 
@@ -74,7 +74,7 @@ module.exports = {
             user_id,
             title,
             body,
-            header_image: req.file.filename,
+            header_image: req.files[0].filename,
             likes,
             description,
             image_alt,
@@ -111,7 +111,7 @@ module.exports = {
             await uploadFile(req, res)      
         } catch (err) {
             res.status(500).send({
-                message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+                message: `Could not upload the file: ${req.files[0].originalname}. ${err}`,
             });
         }    
 
@@ -130,7 +130,7 @@ module.exports = {
             category,
             title,
             body,
-            header_image: typeof file == "string" ? file : req.file.filename,
+            header_image: typeof file == "string" ? file : req.files[0].filename,
             likes,
             description,
             image_alt,

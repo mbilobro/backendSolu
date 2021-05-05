@@ -11,7 +11,7 @@ const morgan = require('morgan')
 const app = express()
 const routes = require('./routes/index.routes')
 
-app.use(express.static('uploads'));
+app.use("/files", express.static('uploads'));
 
 const {createConnection} = require("typeorm");
 
@@ -36,6 +36,7 @@ createConnection({
         require("./models/Category"),
         require("./models/Comment"),
         require("./models/User"),
+        require("./models/Downloadable"),
         require("./models/ResetPassword"),
         require("./models/Like"),
     ]  
@@ -54,10 +55,10 @@ app.get('/', (req, res) => {
     })
 })
 
-app.post('/upload', MultipartyMiddleware, (req, res) => {    
-    var imagePath = req.files.upload.path;
-    return imagePath
-})
+// app.post('/upload', MultipartyMiddleware, (req, res) => {    
+//     var imagePath = req.files.upload.path;
+//     return imagePath
+// })
 
 app.use(routes)
 
