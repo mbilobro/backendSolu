@@ -21,7 +21,7 @@ module.exports = {
                 {category: Like(`%${filter}%`)},
                 {description: Like(`%${filter}%`)}
             ],
-            order: { created_at: "ASC" },
+            order: { created_at: "DESC" },
         });
 
         return res.json(PostView.renderMany(posts));
