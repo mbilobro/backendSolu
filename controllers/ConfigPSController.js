@@ -13,6 +13,10 @@ module.exports = {
 
     async change(req, res) {
 
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
+
         const { value } = req.params; 
 
         const configRepository = getRepository(ConfigPS);

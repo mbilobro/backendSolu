@@ -12,6 +12,9 @@ require('dotenv/config')
 
 module.exports = {
     async index(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const userRepository = getRepository(User)
         const users = await userRepository.find()
         return res.json(UserView.renderMany(users))
@@ -96,6 +99,9 @@ module.exports = {
         }
     },
     async delete(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const { id } = req.params
 
         try {
@@ -115,6 +121,9 @@ module.exports = {
         }
     },
     async update(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const { id } = req.params
 
         const {

@@ -19,7 +19,7 @@ function generateToken(user) {
         email: user.email,
         avatar: user.avatar
         }, 
-        process.env.JWT_SECRET_KEY_USER, 
+        process.env.JWT_SECRET_KEY_USER || "default", 
         { expiresIn: 172800 } // 2 dias
     )
     return token

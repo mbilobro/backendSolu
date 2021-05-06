@@ -20,7 +20,8 @@ module.exports = {
                 {title: Like(`%${filter}%`)},
                 {category: Like(`%${filter}%`)},
                 {description: Like(`%${filter}%`)}
-            ]
+            ],
+            order: { created_at: "ASC" },
         });
 
         return res.json(PostView.renderMany(posts));
@@ -45,6 +46,9 @@ module.exports = {
     },
 
     async create(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         try {
             await uploadFile(req, res)
             
@@ -105,6 +109,9 @@ module.exports = {
     },
 
     async update(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const { id } = req.params;
 
         try {
@@ -144,6 +151,9 @@ module.exports = {
     },
 
     async delete(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const { id } = req.params;
         console.log(`Querem remover ${id}`)
         const postsRepository = getRepository(Post);

@@ -10,6 +10,9 @@ const moment = require('moment')
 module.exports = {
 
     async index(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const CategoryRepository = getRepository(Category);
 
         const categories = await CategoryRepository.find();
@@ -19,7 +22,9 @@ module.exports = {
  
 
     async create(req, res) {
-       
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const {
             category
         } = req.body

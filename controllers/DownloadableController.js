@@ -13,7 +13,9 @@ module.exports = {
         return res.json(DownloadableView.renderMany(downloadables))
     },
     async create(req, res) {
-    
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         try {
             await uploadFile(req, res)
             
@@ -58,6 +60,9 @@ module.exports = {
         }
     },
     async upload(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const { id } = req.params
 
         try {
@@ -116,6 +121,9 @@ module.exports = {
         }
     },
     async delete(req, res) {
+        if (!req.admin) return res.status(401).send({
+            error: 'user not authorized'
+        });
         const { id } = req.params
 
         try {
