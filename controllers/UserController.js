@@ -78,6 +78,8 @@ module.exports = {
                 template: 'index',
                 context: {
                     name: user_name.toUpperCase(),
+                    linkAccount: `${process.env.WEB_BASE_URL}`,
+                    linkBlog: `${process.env.WEB_BASE_URL}/blog`,
                 }
             }).catch(error => {
                 return res.status(500).send({
@@ -183,7 +185,7 @@ module.exports = {
                 template: 'index',
                 context: {
                     name: user.name.toUpperCase(),
-                    link: `http://localhost:3000/reset/page/${token}`
+                    link: `${process.env.WEB_BASE_URL}/reset/page/${token}`
                 }
             }).then(() => {
                 return res.status(200).send()

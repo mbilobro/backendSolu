@@ -65,7 +65,6 @@ module.exports = {
             body,
             header_image,
             likes,
-            slug,
             description,
             image_alt,
         } = req.body
@@ -77,7 +76,6 @@ module.exports = {
             body,
             header_image: req.files[0].filename,
             likes,
-            slug,
             description,
             image_alt,
             created_at: moment().zone("-03:00").format('YYYY-MM-DD hh:mm:ss')
@@ -124,7 +122,6 @@ module.exports = {
             body,
             file,
             likes,
-            slug,
             description,
             image_alt,
         } = req.body
@@ -135,7 +132,6 @@ module.exports = {
             body,
             header_image: typeof file == "string" ? file : req.files[0].filename,
             likes,
-            slug,
             description,
             image_alt,
         }

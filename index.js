@@ -1,5 +1,3 @@
-const PORT = process.env.PORT || 3005
-
 const cors = require('cors')
 const express = require('express')
 const multiparty = require('connect-multiparty')
@@ -18,14 +16,15 @@ const {createConnection} = require("typeorm");
 // Seta variável global para caminho físico ao baseDir da aplicação
 global.__basedir = __dirname;
 
-// #TODO: Separar em um arquivo de configuração
+const PORT = process.env.PORT || 3005
+
 createConnection({
-    "type": "mysql",
-    "host": "us-cdbr-east-02.cleardb.com",
-    "port": 3306,
-    "username": "bed2e57733bf13",
-    "password": "a0662b33",
-    "database": "heroku_46108b30f819760",
+    "type": process.env.TYPEORM_DEFAULT_TYPE,
+    "host": process.env.TYPEORM_DEFAULT_HOST,
+    "port": process.env.TYPEORM_DEFAULT_PORT,
+    "username": process.env.TYPEORM_DEFAULT_USERNAME,
+    "password": process.env.TYPEORM_DEFAULT_PASSWORD,
+    "database": process.env.TYPEORM_DEFAULT_DATABASE,
     // logging: true,
     "options": {
         "encrypt": false,
@@ -39,6 +38,7 @@ createConnection({
         require("./models/Downloadable"),
         require("./models/ResetPassword"),
         require("./models/Like"),
+        require("./models/ConfigPS"),
     ]  
 });
 

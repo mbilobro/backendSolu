@@ -11,7 +11,6 @@ module.exports =  {
             likes: post.likes,
             description: post.description,
             image_alt: post.image_alt,
-            slug: post.slug,
             created_at: post.created_at
         };
     },
